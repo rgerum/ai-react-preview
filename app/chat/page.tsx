@@ -41,7 +41,7 @@ export default function Page() {
 
   return (
     <>
-      {null &&
+      {/*null &&
         messages.map((message) => (
           <div key={message.id}>
             {message.role === "user" ? "User: " : "AI: "}
@@ -51,7 +51,7 @@ export default function Page() {
               ) : null,
             )}
           </div>
-        ))}
+          ))*/}
 
       <div
         style={{
