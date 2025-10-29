@@ -3,7 +3,7 @@
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
 import { useState } from "react";
-import { CodePreview } from "../Playground";
+import { CodePreview } from "../CodePreview";
 
 export default function Page() {
   const { messages, sendMessage, status } = useChat({
@@ -53,13 +53,7 @@ export default function Page() {
           </div>
           ))*/}
 
-      <div
-        style={{
-          display: "flex",
-          height: "calc(100vh - 100px)",
-          marginBottom: "100px",
-        }}
-      >
+      <div className="flex h-[calc(100vh-100px)] mb-[100px]">
         <CodePreview code={code} />
       </div>
 
@@ -71,74 +65,25 @@ export default function Page() {
             setInput("");
           }
         }}
-        style={{
-          position: "fixed",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          backgroundColor: "white",
-          borderTop: "1px solid #e5e7eb",
-          padding: "16px 24px",
-          display: "flex",
-          gap: "12px",
-          alignItems: "center",
-          boxShadow: "0 -4px 6px -1px rgba(0, 0, 0, 0.1)",
-        }}
+        className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-300 px-6 py-4 flex gap-3 items-center shadow-lg"
       >
         <input
           value={input}
           onChange={(e) => setInput(e.target.value)}
           disabled={status !== "ready"}
           placeholder="Ask AI to create or modify React components..."
-          style={{
-            flex: 1,
-            padding: "12px 16px",
-            border: "1px solid #d1d5db",
-            borderRadius: "24px",
-            outline: "none",
-            fontSize: "14px",
-            backgroundColor: status !== "ready" ? "#f9fafb" : "white",
-            transition: "all 0.2s ease",
-            boxShadow:
-              status !== "ready" ? "none" : "0 1px 3px rgba(0, 0, 0, 0.1)",
-          }}
-          onFocus={(e) => {
-            e.target.style.borderColor = "#3b82f6";
-            e.target.style.boxShadow = "0 0 0 3px rgba(59, 130, 246, 0.1)";
-          }}
-          onBlur={(e) => {
-            e.target.style.borderColor = "#d1d5db";
-            e.target.style.boxShadow = "0 1px 3px rgba(0, 0, 0, 0.1)";
-          }}
+          className={`flex-1 px-4 py-3 border border-gray-300 rounded-full outline-none text-sm transition-all duration-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 ${
+            status !== "ready" ? "bg-gray-50" : "bg-white shadow-sm"
+          }`}
         />
         <button
           type="submit"
           disabled={status !== "ready"}
-          style={{
-            padding: "12px 24px",
-            backgroundColor: status !== "ready" ? "#9ca3af" : "#3b82f6",
-            color: "white",
-            border: "none",
-            borderRadius: "24px",
-            fontWeight: "600",
-            fontSize: "14px",
-            cursor: status !== "ready" ? "not-allowed" : "pointer",
-            transition: "all 0.2s ease",
-            boxShadow:
-              status !== "ready" ? "none" : "0 2px 4px rgba(59, 130, 246, 0.2)",
-          }}
-          onMouseEnter={(e) => {
-            if (status === "ready") {
-              e.target.style.backgroundColor = "#2563eb";
-              e.target.style.transform = "translateY(-1px)";
-            }
-          }}
-          onMouseLeave={(e) => {
-            if (status === "ready") {
-              e.target.style.backgroundColor = "#3b82f6";
-              e.target.style.transform = "translateY(0)";
-            }
-          }}
+          className={`px-6 py-3 text-white border-none rounded-full font-semibold text-sm transition-all duration-200 ${
+            status !== "ready"
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-blue-500 cursor-pointer hover:bg-blue-600 hover:-translate-y-0.5 shadow-md hover:shadow-lg"
+          }`}
         >
           {status === "loading" ? "Sending..." : "Send"}
         </button>

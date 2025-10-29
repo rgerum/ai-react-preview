@@ -10,7 +10,17 @@ export async function POST(req: Request) {
   const result = streamText({
     model: openai("gpt-4o"),
     messages: convertToModelMessages(messages),
-    system: `Always output react components, i.e. 'function App() { const [state, setState] = React.useState(); return ( <div>Hello World!</div> ); };'. Your main component called App, no need to export it or import React. Always write React.useState and not useState directly. Use tailwind classes for styling.`,
+    system: `Always output react components, i.e. 'function App() { const [state, setState] = React.useState(); return ( <div>Hello World!</div> ); };'. Your main component called App, no need to export it or import React. Always write React.useState and not useState directly. Use tailwind classes for styling. You can use the following shadcn/ui components
+    Button,
+    Card,
+    CardHeader,
+    CardTitle,
+    CardDescription,
+    CardContent,
+    CardFooter,
+    CardAction,
+    Input,
+    cn, without import`,
   });
 
   return result.toUIMessageStreamResponse();
